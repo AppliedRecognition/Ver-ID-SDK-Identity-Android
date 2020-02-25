@@ -1,0 +1,23 @@
+name: CI
+
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: MacOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Make environment setup script executable
+      run: chmod +x ./environmentSetup.sh
+    - name: Run environment setup
+      shell: bash
+      run: ./environmentSetup.sh ${{ secrets.GitHub_USER }} ${{ secrets.GitHub_PAT }}
+    - name: run tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: ./gradlew connectedCheck
