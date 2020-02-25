@@ -1,4 +1,6 @@
-#  Ver-ID SDK Identity
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/AppliedRecognition/Ver-ID-SDK-Identity-Android) ![CI](https://github.com/AppliedRecognition/Ver-ID-SDK-Identity-Android/workflows/CI/badge.svg?event=push)
+
+# Ver-ID SDK Identity
 
 ### Library that provides a client identity to [Ver-ID SDK](https://github.com/AppliedRecognition/Ver-ID-UI-Android) 1.19.0 and newer
 
