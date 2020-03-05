@@ -35,7 +35,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testCreateClient_failMissingCredentials() {
         try {
-            new VerIDSDKIdentity(getContext());
+            new VerIDIdentity(getContext());
             fail();
         } catch (Exception ignore) {
         }
@@ -44,7 +44,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testCreateClient_succeeds() {
         try {
-            new VerIDSDKIdentity(getIdentityInputStream(), correctPassword);
+            new VerIDIdentity(getIdentityInputStream(), correctPassword);
         } catch (Exception e) {
             fail(e.getLocalizedMessage());
         }
@@ -53,7 +53,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testCreateClient_failMissingPassword() {
         try {
-            new VerIDSDKIdentity(getIdentityInputStream(), null);
+            new VerIDIdentity(getIdentityInputStream(), null);
             fail();
         } catch (Exception ignore) {
         }
@@ -63,7 +63,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     public void testCreateClient_failMissingIdentityFile() {
         try {
             InputStream inputStream = new ByteArrayInputStream(new byte[]{0,0,0,0,0,0,0,0});
-            new VerIDSDKIdentity(inputStream, correctPassword);
+            new VerIDIdentity(inputStream, correctPassword);
             fail();
         } catch (Exception ignore) {
         }
@@ -72,7 +72,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testCreateClient_failInvalidPassword() {
         try {
-            new VerIDSDKIdentity(getIdentityInputStream(), "nonsense");
+            new VerIDIdentity(getIdentityInputStream(), "nonsense");
             fail();
         } catch (Exception ignore) {
         }
@@ -82,7 +82,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     public void testCreateIdentityFromRemoteURL_succeeds() {
         try {
             URL url = new URL("https://ver-id.s3.us-east-1.amazonaws.com/ios/com.appliedrec.verid.licenceclient/test_assets/Ver-ID%20identity.p12");
-            new VerIDSDKIdentity(url, correctPassword);
+            new VerIDIdentity(url, correctPassword);
         } catch (Exception e) {
             fail();
         }
@@ -91,7 +91,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testClientCommonName_matches() {
         try {
-            VerIDSDKIdentity identity = new VerIDSDKIdentity(getIdentityInputStream(), correctPassword);
+            VerIDIdentity identity = new VerIDIdentity(getIdentityInputStream(), correctPassword);
             assertEquals(identity.getCommonName(), commonName);
         } catch (Exception e) {
             fail();
@@ -101,7 +101,7 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testSignMessage_succeeds() {
         try {
-            VerIDSDKIdentity identity = new VerIDSDKIdentity(getIdentityInputStream(), correctPassword);
+            VerIDIdentity identity = new VerIDIdentity(getIdentityInputStream(), correctPassword);
             byte[] message = {0,0,0,0,0,0,0,0};
             identity.sign(message);
         } catch (Exception e) {
@@ -112,9 +112,9 @@ public class VerIDSDKIdentityInstrumentedTest {
     @Test
     public void testVerifySignature_succeeds() {
         try {
-            VerIDSDKIdentity identity = new VerIDSDKIdentity(getIdentityInputStream(), correctPassword);
+            VerIDIdentity identity = new VerIDIdentity(getIdentityInputStream(), correctPassword);
             byte[] message = {0,0,0,0,0,0,0,0};
-            Signature signature = Signature.getInstance(VerIDSDKIdentity.DEFAULT_SIGNATURE_ALGORITHM);
+            Signature signature = Signature.getInstance(VerIDIdentity.DEFAULT_SIGNATURE_ALGORITHM);
             signature.initVerify(identity.getCertificate());
             signature.update(message);
             if (!signature.verify(identity.sign(message))) {

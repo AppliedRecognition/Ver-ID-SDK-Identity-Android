@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.artifactory'
 
 def getArtifactId = { ->
     return "identity"
@@ -26,6 +27,23 @@ android {
         }
     }
 
+}
+
+artifactory {
+    contextUrl = verid_artifactory_url
+    //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = verid_artifactory_repo
+            username = verid_artifactory_username
+            password = verid_artifactory_password
+            maven = true
+        }
+        defaults {
+            publications('veridsdkidentity')
+            publishArtifacts = true
+        }
+    }
 }
 
 publishing {

@@ -46,60 +46,60 @@
         </application>
     </manifest>
     ~~~
-3. Create an instance of **VerIDSDKIdentity**:
+3. Create an instance of **VerIDIdentity**:
 
     ~~~java
     try {
         Context context; // Your application context
-        VerIDSDKIdentity identity = new VerIDSDKIdentity(context);
+        VerIDIdentity identity = new VerIDIdentity(context);
     } catch(Exception e) {
     }
     ~~~
     
 ### Option 2
 1. Copy the **Ver-ID identity.p12** file in your app's assets.
-2. Create an instance of **VerIDSDKIdentity**:
+2. Create an instance of **VerIDIdentity**:
 
     ~~~java
     try {
         Context context; // Your application context
-        VerIDSDKIdentity identity = new VerIDSDKIdentity(context, "your password goes here");
+        VerIDIdentity identity = new VerIDIdentity(context, "your password goes here");
     } catch(Exception e) {
     }
     ~~~
     
 ### Option 3
 1. Upload the **Ver-ID identity.p12** online.
-2. Create an instance of **VerIDSDKIdentity** referencing the URL of the **Ver-ID identity.p12** file:
+2. Create an instance of **VerIDIdentity** referencing the URL of the **Ver-ID identity.p12** file:
 
     ~~~java
     try {
         URL url = new URL("https://ver-id.s3.us-east-1.amazonaws.com/ios/com.appliedrec.verid.licenceclient/test_assets/Ver-ID%20identity.p12")
-        VerIDSDKIdentity identity = new VerIDSDKIdentity(url, "your password goes here");
+        VerIDIdentity identity = new VerIDIdentity(url, "your password goes here");
     } catch(Exception e) {
     }
     ~~~
     
 ### Option 4
 1. Store the **Ver-ID identity.p12** in your app.
-3. Create an instance of **VerIDSDKIdentity** referencing the **Ver-ID identity.p12** file:
+3. Create an instance of **VerIDIdentity** referencing the **Ver-ID identity.p12** file:
 
     ~~~java
     try {
         File file = new File("path/to/Ver-ID identity.p12");
-        VerIDSDKIdentity identity = new VerIDSDKIdentity(file, "your password goes here");
+        VerIDIdentity identity = new VerIDIdentity(file, "your password goes here");
     } catch(Exception e) {
     }
     ~~~
 
 ## Providing your identity to Ver-ID SDK 1.19.0 and newer
-[Create an instance](#creating-a-ver-id-sdk-identity) of **VerIDSDKIdentity** and pass it to [**VerIDFactory**](https://appliedrecognition.github.io/Ver-ID-UI-Android/com.appliedrec.verid.core.VerIDFactory.html):
+[Create an instance](#creating-a-ver-id-sdk-identity) of **VerIDIdentity** and pass it to [**VerIDFactory**](https://appliedrecognition.github.io/Ver-ID-UI-Android/com.appliedrec.verid.core.VerIDFactory.html):
 
 ~~~java    
 try {
     Context context; // Your application context
     // See above
-    VerIDSDKIdentity identity = new VerIDSDKIdentity(context);
+    VerIDIdentity identity = new VerIDIdentity(context);
     // Construct VerIDFactory with your identity
     VerIDFactory veridFactory = new VerIDFactory(identity);
     // ... use veridFactory to create an instance of VerID
