@@ -15,7 +15,7 @@ jobs:
       run: chmod +x ./environmentSetup.sh
     - name: Run environment setup
       shell: bash
-      run: ./environmentSetup.sh ${{ secrets.GitHub_USER }} ${{ secrets.GitHub_PAT }}
+      run: ./environmentSetup.sh ${{ secrets.GitHub_USER }} ${{ secrets.GitHub_PAT }} ${{ secrets.Artifactory_URL }} ${{ secrets.Artifactory_REPO }} ${{ secrets.Artifactory_USER }} ${{ secrets.Artifactory_PASSWORD }}
     - name: run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
