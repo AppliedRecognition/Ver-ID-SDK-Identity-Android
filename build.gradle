@@ -29,7 +29,7 @@ ext {
     appcompatVersion = '[1.1.0,2.0.0['
     versionMajor = 1
     versionMinor = 1
-    versionPatch = 0
+    versionPatch = 1
     versionClassifier = null
     versionClassifierVersion = ""
     minSdkVersion = 14

@@ -1,6 +1,7 @@
 package com.appliedrec.verid.identity;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 
@@ -51,7 +52,7 @@ public final class VerIDIdentity {
      * @since 1.1.0
      */
     public VerIDIdentity(@NonNull Context context) throws Exception {
-        String password = context.getApplicationContext().getApplicationInfo().metaData.getString("com.appliedrec.verid.password");
+        String password = context.getApplicationContext().getPackageManager().getApplicationInfo(context.getApplicationContext().getPackageName(), PackageManager.GET_META_DATA).metaData.getString("com.appliedrec.verid.password");
         if (password == null) {
             throw new Exception();
         }

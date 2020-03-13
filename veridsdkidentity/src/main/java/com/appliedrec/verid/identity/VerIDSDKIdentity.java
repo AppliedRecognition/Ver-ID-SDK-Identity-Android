@@ -140,4 +140,8 @@ public final class VerIDSDKIdentity {
     public byte[] sign(@NonNull byte[] message, @NonNull String algorithm) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         return verIDIdentity.sign(message, algorithm);
     }
+
+    public VerIDIdentity getVerIDIdentity() {
+        return verIDIdentity;
+    }
 }
