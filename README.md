@@ -12,15 +12,11 @@
     ~~~groovy
     repositories {
         maven {
-            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-SDK-Identity-Android")
-            credentials {
-                username = yourGithubUsername
-                password = yourGithubPersonalAccessToken
-            }
+            url 'https://dev.ver-id.com/artifactory/gradle-release'
         }
     }
     dependencies {
-        implementation 'com.appliedrec.verid:identity:[1.0.0,2.0.0['
+        implementation 'com.appliedrec.verid:identity:[1.1.1,2.0.0['
     }
     ~~~
  3. Sync your Android Studio project.
