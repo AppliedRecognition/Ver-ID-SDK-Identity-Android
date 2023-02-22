@@ -1,4 +1,4 @@
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/AppliedRecognition/Ver-ID-SDK-Identity-Android) ![CI](https://github.com/AppliedRecognition/Ver-ID-SDK-Identity-Android/workflows/CI/badge.svg?event=push)
+![Maven Central](https://img.shields.io/maven-central/v/com.appliedrec.verid/identity)
 
 # Ver-ID SDK Identity
 
@@ -6,18 +6,11 @@
 
 ## Installation
 
- 1. [Generate a Github personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line). Ensure you select the **read:packages** scope.
- 2. Open your module's **build.gradle** file and add the following entries replacing `yourGithubUsername` with your Github user name and `yourGithubPersonalAccessToken` with the access token you generated in the previous step:
+ 1. Ensure `mavenCentral()` is added in your project's repositories.
+ 2. Add the following entry in your module's dependencies:
 
     ~~~groovy
-    repositories {
-        maven {
-            url 'https://dev.ver-id.com/artifactory/gradle-release'
-        }
-    }
-    dependencies {
-        implementation 'com.appliedrec.verid:identity:[1.1.1,2.0.0['
-    }
+    implementation 'com.appliedrec.verid:identity:[1.1.1,2.0.0['
     ~~~
  3. Sync your Android Studio project.
 

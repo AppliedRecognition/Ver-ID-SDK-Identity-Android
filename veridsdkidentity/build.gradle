@@ -1,21 +1,18 @@
-apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.artifactory'
-
-def getArtifactId = { ->
-    return "identity"
+plugins {
+    id 'com.android.library'
+    id 'com.vanniktech.maven.publish'
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode rootProject.generateVersionCode()
         versionName rootProject.generateVersionName()
-        archivesBaseName = getArtifactId()
+        archivesBaseName = 'identity'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,61 +23,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-}
-
-artifactory {
-    contextUrl = verid_artifactory_url
-    //The base Artifactory URL if not overridden by the publisher/resolver
-    publish {
-        repository {
-            repoKey = verid_artifactory_repo
-            username = verid_artifactory_username
-            password = verid_artifactory_password
-            maven = true
-        }
-        defaults {
-            publications('veridsdkidentity')
-            publishArtifacts = true
-        }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
-}
 
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AppliedRecognition/Ver-ID-SDK-Identity-Android")
-            credentials {
-                username = githubUsername
-                password = githubAccessToken
-            }
-        }
-    }
-    publications {
-        veridsdkidentity(MavenPublication) {
-            groupId "com.appliedrec.verid"
-            version rootProject.generateVersionName()
-            artifactId getArtifactId()
-            artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar") {
-                extension "aar"
-            }
-            pom.withXml {
-                def dependenciesNode = asNode().appendNode('dependencies')
-                def appcompatNode = dependenciesNode.appendNode('dependency')
-                appcompatNode.appendNode('groupId', 'androidx.appcompat')
-                appcompatNode.appendNode('artifactId', 'appcompat')
-                appcompatNode.appendNode('version', rootProject.appcompatVersion)
-            }
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
